@@ -27,7 +27,7 @@ ssh -i "big_data_project.pem" ec2-user@ec2-3-238-16-255.compute-1.amazonaws.com
 > icacls .\bigdata_project.pem /inheritance:r
 > ```
 
-# 3. Download Kafka to instance
+# 3. Download and Extract Kafka to instance
 
 ```sh
 wget https://downloads.apache.org/kafka/3.4.0/kafka_2.13-3.4.0.tgz
@@ -43,21 +43,25 @@ java -version
 sudo yum install java-1.8.0-openjdk
 java -version
 
-#Change directory to kafka
-cd kafka_2.13-3.4.0
 ```
 
 # 5. Start Zoo-keeper:
 
 ```sh
+#Change directory to kafka
+cd kafka_2.13-3.4.0
 bin/zookeeper-server-start.sh config/zookeeper.properties
 ```
 
 # 6. Start Kafka-server:
 
 ```sh
-#Duplicate the session & enter in a new console --
+#Duplicate the session & enter in a new console
+
+#Allocate some memory to Kafka server
 export KAFKA_HEAP_OPTS="-Xmx256M -Xms128M"
+
+#Start Server
 cd kafka_2.13-3.4.0
 bin/kafka-server-start.sh config/server.properties
 ```
@@ -76,7 +80,7 @@ advertised_listeners=PLAIN_TEXT//54.237.56.69:9092
 
 ```sh
 #Duplicate the session & enter in a new console
-#Here, I have created topic named 'Sales' with singe partition and single replication factor: By default it will spin 3 replication
+#Here, I have created topic named 'Sales' with single partition and single replication factor: By default it will spin 3 replication
 cd kafka_2.13-3.4.0
 bin/kafka-topics.sh --create --topic Sales --bootstrap-server 54.237.56.69:9092 --replication-factor 1 --partitions 1
 ```
@@ -84,6 +88,8 @@ bin/kafka-topics.sh --create --topic Sales --bootstrap-server 54.237.56.69:9092 
 # 9. Start Producer:
 
 ```sh
+#Duplicate the session & enter in a new console
+cd kafka_2.13-3.4.0
 bin/kafka-console-producer.sh --topic Sales --bootstrap-server 54.237.56.69:9092
 ```
 
@@ -96,8 +102,3 @@ bin/kafka-console-consumer.sh --topic Sales --bootstrap-server 54.237.56.69:9092
 ```
 
 Now you can write message to Kafka broker/server from producer and it will be reflected to consumer since we have one consumer connected.
-
-> **_Note :_**
-> In kafka, basically one partitioned can only be allocated to one consumer since Kafka is built to support both the feature like queue and pub/sub.
->
-> If another consumer have to access the data from same partition, it has to use another consumer group.

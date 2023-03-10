@@ -1,6 +1,6 @@
 # Data Science and Big Data Project
 
-## Real Time analysis on Sales data.
+## Real Time Prediction of Purchasing sum based on previous Sales data.
 
 ### Introduction
 
@@ -25,3 +25,7 @@ Here is the dataset used in this project - https://www.kaggle.com/code/harshjain
 ## Demo Video
 
 Here is the demo for this project - https://drive.google.com/file/d/1KsTe0X7jBH-gFHlbSiq9CePxttSwV0Ty/view
+
+## Commands
+
+#### Refer to [Command.md](command.md) for project set up.
