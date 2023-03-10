@@ -8,7 +8,7 @@
 
 ```sh
 cd path_to_key
-ssh -i "bigdata-datascience-project.pem" ec2-user@ec2-3-238-16-255.compute-1.amazonaws.com
+ssh -i "big_data_project.pem" ec2-user@ec2-3-238-16-255.compute-1.amazonaws.com
 ```
 
 > **_NOTE:_** If you are getting permission error :
@@ -16,15 +16,15 @@ ssh -i "bigdata-datascience-project.pem" ec2-user@ec2-3-238-16-255.compute-1.ama
 > #### Mac or Linux
 >
 > ```sh
-> chmod 400 bigdata-datascience-project.pem
+> chmod 400 big_data_project.pem.pem
 > ```
 >
 > #### Windows
 >
 > ```powershell
-> icacls .\bigdata-datascience-project.pem /reset
-> icacls .\bigdata-datascience-project.pem /grant:r "$($env:username):(r)"
-> icacls .\bigdata-datascience-project.pem /inheritance:r
+> icacls .\bigdata_project.pem /reset
+> icacls .\bigdata_project.pem /grant:r "$($env:username):(r)"
+> icacls .\bigdata_project.pem /inheritance:r
 > ```
 
 # 3. Download Kafka to instance
@@ -67,7 +67,7 @@ bin/kafka-server-start.sh config/server.properties
 ```sh
 sudo nano config/server.properties
 #change ADVERTISED_LISTENERS to public ip of the EC2 instance, eg:
-advertised_listeners=PLAIN_TEXT//3.238.16.255:9092
+advertised_listeners=PLAIN_TEXT//54.237.56.69:9092
 ```
 
 # 7. Restart Zoo-keeper and Kafka-server
@@ -78,13 +78,13 @@ advertised_listeners=PLAIN_TEXT//3.238.16.255:9092
 #Duplicate the session & enter in a new console
 #Here, I have created topic named 'Sales' with singe partition and single replication factor: By default it will spin 3 replication
 cd kafka_2.13-3.4.0
-bin/kafka-topics.sh --create --topic Sales --bootstrap-server 3.238.16.255:9092 --replication-factor 1 --partitions 1
+bin/kafka-topics.sh --create --topic Sales --bootstrap-server 54.237.56.69:9092 --replication-factor 1 --partitions 1
 ```
 
 # 9. Start Producer:
 
 ```sh
-bin/kafka-console-producer.sh --topic Sales --bootstrap-server 3.238.16.255:9092
+bin/kafka-console-producer.sh --topic Sales --bootstrap-server 54.237.56.69:9092
 ```
 
 # 10. Start Consumer:
@@ -92,7 +92,7 @@ bin/kafka-console-producer.sh --topic Sales --bootstrap-server 3.238.16.255:9092
 ```sh
 #Duplicate the session & enter in a new console --
 cd kafka_2.13-3.4.0
-bin/kafka-console-consumer.sh --topic Sales --bootstrap-server 3.238.16.255:9092
+bin/kafka-console-consumer.sh --topic Sales --bootstrap-server 54.237.56.69:9092
 ```
 
 Now you can write message to Kafka broker/server from producer and it will be reflected to consumer since we have one consumer connected.

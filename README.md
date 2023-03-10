@@ -21,3 +21,7 @@ We are going to use different technologies such as Python, Amazon Web Services (
 ## Dataset Used
 
 Here is the dataset used in this project - https://www.kaggle.com/code/harshjain123/black-friday-sales-data-analysis/notebook
+
+## Demo Video
+
+Here is the demo for this project - https://drive.google.com/file/d/1KsTe0X7jBH-gFHlbSiq9CePxttSwV0Ty/view
